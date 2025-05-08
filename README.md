@@ -128,7 +128,9 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 <!-- START_COMMIT_TABLE -->
 | Name | 5.14 | 5.15 | 5.16 | 5.17 | 5.18 |
 | ------------- | ---- | ---- | ---- | ---- | ---- |
+| [jameelovecat](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/jameelovecat.md) | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
