@@ -130,7 +130,9 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | ------------- | ---- | ---- | ---- | ---- | ---- |
 | [jameelovecat](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/jameelovecat.md) | | | | | |
 | [k66](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/k66.md) | | | | | |
+| [Jack-OuCJ](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/Jack-OuCJ.md) | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
