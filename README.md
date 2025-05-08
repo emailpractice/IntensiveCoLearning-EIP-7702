@@ -134,7 +134,9 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [wayhome](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/wayhome.md) | | | | | |
 | [nx-xn2002](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/nx-xn2002.md) | | | | | |
 | [qiaopengjun5162](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/qiaopengjun5162.md) | | | | | |
+| [MRzzz-cyber](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/MRzzz-cyber.md) | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
