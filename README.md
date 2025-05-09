@@ -12,13 +12,10 @@ EIP-7702, EIP, ERC, Ethereum
 
 ## 面向人群
 
-✅ 开发者：想深入 EIP-7702 并构建应用
-
-✅ 产品经理：探索账户抽象的商业潜力
-
-✅ 研究员：了解以太坊最新技术趋势
-
-✅ 任何对 Web3 创新感兴趣的人
+- 开发者：想深入 EIP-7702 并构建应用
+- 产品经理：探索账户抽象的商业潜力
+- 研究员：了解以太坊最新技术趋势
+- 任何对 Web3 创新感兴趣的人
 
 ## 报名时间
 
@@ -141,15 +138,6 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [yushiwuzheng666](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/yushiwuzheng666.md) | | | | | |
 | [universe-ron](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/universe-ron.md) | | | | | |
 <!-- END_COMMIT_TABLE -->
-
-
-
-
-
-
-
-
-
 
 
 
