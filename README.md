@@ -137,7 +137,9 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [Sponge](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/Sponge.md) | | | | | |
 | [yushiwuzheng666](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/yushiwuzheng666.md) | | | | | |
 | [universe-ron](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/universe-ron.md) | | | | | |
+| [cxc474](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/cxc474.md) | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
