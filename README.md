@@ -156,7 +156,9 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [gardennn](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/gardennn.md) | | | | | |
 | [narnona](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/narnona.md) | | | | | |
 | [nghdavid](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/nghdavid.md) | | | | | |
+| [easyshellworld](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/easyshellworld.md) | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
