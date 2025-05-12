@@ -150,7 +150,12 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [emailpractice](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/emailpractice.md) | | | | | |
 | [wiasliaw](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/wiasliaw.md) | | | | | |
 | [BillyC](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/BillyC.md) | | | | | |
+| [tofudfy](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/tofudfy.md) | | | | | |
+| [gpteth](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/gpteth.md) | | | | | |
+| [bobs-1](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/bobs-1.md) | | | | | |
+| [gardennn](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/gardennn.md) | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
