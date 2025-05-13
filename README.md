@@ -162,7 +162,9 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [luleigreat](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/luleigreat.md) | | | | | |
 | [blahole](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/blahole.md) | | | | | |
 | [wodeche](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/wodeche.md) | | | | | |
+| [helloworldsmart](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/helloworldsmart.md) | | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
