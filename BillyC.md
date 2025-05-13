@@ -7,9 +7,9 @@ timezone: UTC+8
 
 # 你的名字
 
-1. 自我介绍
-2. 你认为你会完成本次残酷学习吗？
-3. 你的联系方式（推荐 Telegram）
+1. Billy
+2. Yes, will try my best
+3. TG: ounaiewfo
 
 ## Notes
 
