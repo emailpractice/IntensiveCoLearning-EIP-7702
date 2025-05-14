@@ -139,7 +139,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [universe-ron](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/universe-ron.md) | ✅ | | | | |
 | [cxc474](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/cxc474.md) | ✅ | | | | |
 | [fffuuuming](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/fffuuuming.md) | ✅ | | | | |
-| [Sandybaby07](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/Sandybaby07.md) |   | | | | |
+| [Sandybaby07](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/Sandybaby07.md) | ✅ | | | | |
 | [a39955720](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/a39955720.md) |   | | | | |
 | [xwwkk](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/xwwkk.md) | ✅ | | | | |
 | [bamboochen92518](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/bamboochen92518.md) |   | | | | |
@@ -167,6 +167,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [chesley666](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/chesley666.md) | ✅ | | | | |
 | [kevinsslin](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/kevinsslin.md) |   | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
