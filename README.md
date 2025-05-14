@@ -132,7 +132,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [nx-xn2002](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/nx-xn2002.md) |   | | | | |
 | [qiaopengjun5162](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/qiaopengjun5162.md) | ✅ | | | | |
 | [MRzzz-cyber](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/MRzzz-cyber.md) |   | | | | |
-| [brucexu-eth](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/brucexu-eth.md) | ✅ | | | | |
+| [brucexu-eth](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/brucexu-eth.md) | ✅ |   | | | |
 | [jjeejj](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/jjeejj.md) |   | | | | |
 | [Sponge](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/Sponge.md) |   | | | | |
 | [yushiwuzheng666](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/yushiwuzheng666.md) |   | | | | |
@@ -146,7 +146,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [keylen](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/keylen.md) |   | | | | |
 | [york](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/york.md) |   | | | | |
 | [Ellen](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/Ellen.md) |   | | | | |
-| [evshary](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/evshary.md) |   | | | | |
+| [evshary](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/evshary.md) | ✅ | | | | |
 | [emailpractice](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/emailpractice.md) |   | | | | |
 | [wiasliaw](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/wiasliaw.md) | ✅ | | | | |
 | [BillyC](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/BillyC.md) |   | | | | |
@@ -167,6 +167,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [chesley666](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/chesley666.md) |   | | | | |
 | [kevinsslin](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/kevinsslin.md) |   | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
