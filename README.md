@@ -157,7 +157,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [narnona](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/narnona.md) |   | | | | |
 | [nghdavid](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/nghdavid.md) |   | | | | |
 | [easyshellworld](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/easyshellworld.md) |   | | | | |
-| [alichaw](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/alichaw.md) |   | | | | |
+| [alichaw](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/alichaw.md) | ✅ | | | | |
 | [ygy-1231](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/ygy-1231.md) |   | | | | |
 | [luleigreat](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/luleigreat.md) |   | | | | |
 | [blahole](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/blahole.md) |   | | | | |
@@ -165,6 +165,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [helloworldsmart](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/helloworldsmart.md) |   | | | | |
 | [alexliao](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/alexliao.md) |   | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
