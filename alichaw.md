@@ -15,9 +15,12 @@ timezone: UTC+8
 
 <!-- Content_START -->
 
-### 2025.07.11
-
-笔记内容
+### 2025.05.14
+- Smart EOA 概念理解
+- EIP-7702 的目的
+- 和 EIP-4337、帳戶抽象的關係
+- Pectra
+[Day1 學習筆記](https://medium.com/@alichen308/day-1-eip-7702-%E6%A6%82%E5%BF%B5%E8%88%87%E8%83%8C%E6%99%AF%E7%90%86%E8%A7%A3-1fb81d56793f)
 
 ### 2025.07.12
 
