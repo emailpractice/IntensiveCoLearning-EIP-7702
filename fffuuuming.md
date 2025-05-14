@@ -16,8 +16,42 @@ https://t.me/fffuuuming
 <!-- Content_START -->
 
 ### 2025.07.11
+### 2025-05-14
+#### Core idea of EIP-7702
+- **What** : Account Abstraction, allow EOAs to have code, which enable EOAs for batch operations, implementing native multisig, or alternative signature schemes
+- **How** : Introduces a new transaction type `SET_CODE_TX_TYPE (0x04)` that allows accounts to set and delegate code on themselves
+    - **delegation designator** : a specific prefix, which is followed by an address and stored in the **account's code** instead of the full contract code
+        - (```0xef0100``` || ```address```)
+        -  Indicates where the actual smart contract code resides on-chain.
+    - **authorization list** : ```[chain_id, address, nonce, y_parity, r, s]```
+#### Some notes
+- Multiple wallets can point to the same delegation designator contract at the same time.
+- Can **redelegate** from one delegation designator contract to another, but be aware of **collision**
+- The owner of the EOA can **clear the code by delegating to address(0)**. This will restore your EOA back to normal.
+#### Security Risk & Vulnerabilities
+1. Delegate contract lacks proper access controls
+2. Initialization challenges
+    - **Constructors** : The delegation transaction doesn’t include ```initcode```,  so the ```constructor``` of the delegation designator contract does not execute in the context of the EOA -> use **initialization pattern**
+    - **Front running and (re)initialization**
+        - ensure that the ```initialize``` function has proper access controls and cannot be re-initialized
+        - delegate and call the ```initialize``` function in the same transaction, otherwise it may be frontran
+3. Storage collisions
+Delegating code does not clear existing storage
+    ```solidity!
+    //SPDX-License-Identifier: MIT
+    pragma solidity 0.8.20;
 
-笔记内容
+    contract ContractA{
+        bool thisIsABool = true;
+    }
+
+    contract ContractB{
+        uint thisIsAUint;
+    }
+    ```
+    - migrate from ```ContractA``` to ```ContractB```
+    - Ignore accountting for the old storage data
+    - Storage collision : ```uint``` in the second contract will be interpreted as a ```bool```
 
 ### 2025.07.12
 

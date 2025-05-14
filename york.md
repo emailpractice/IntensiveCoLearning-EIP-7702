@@ -8,7 +8,7 @@ timezone: UTC+8
 # 你的名字
 
 1. 自我介绍 York
-2. 你认为你会完成本次残酷学习吗？ I will try my best.
+2. 你认为你会完成本次残酷学习吗？ I will do my best.
 3. 你的联系方式（推荐 Telegram）Telegram group -> York
 
 ## Notes
@@ -16,9 +16,23 @@ timezone: UTC+8
 <!-- Content_START -->
 
 ### 2025.05.14
+Key Points
+1. What is EIP-7702
+2. How it works?
+3. What is Set Code?
+4. Difference between EIP-4337 and EIP-3074
 
-
+Note Link: https://github.com/Yorkchung/EIP-7702-Learning/blob/main/Day01.md
 
 ### 2025.05.15
+
+
+### 2025.05.16
+
+
+### 2025.05.17
+
+
+### 2025.05.18
 
 <!-- Content_END -->
