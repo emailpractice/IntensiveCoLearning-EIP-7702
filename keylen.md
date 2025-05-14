@@ -15,10 +15,8 @@ timezone: UTC+8
 
 <!-- Content_START -->
 
-### 2025.07.11
+### 2025.5.14
 
-笔记内容
-
-### 2025.07.12
-
-<!-- Content_END -->
+- 研读okxwallet的钱包实现 https://etherscan.io/address/0x80296FF8D1ED46f8e3C7992664D13B833504c2Bb#code
+- 在本地实现了sender指定多笔交易的交易构建与前端交互（不过目前没有实现拉起钱包交互）
+- 参考资料：https://learnblockchain.cn/article/11498
