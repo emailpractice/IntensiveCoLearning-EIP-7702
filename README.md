@@ -165,7 +165,9 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [helloworldsmart](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/helloworldsmart.md) |   | | | | |
 | [alexliao](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/alexliao.md) |   | | | | |
 | [chesley666](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/chesley666.md) |   | | | | |
+| [kevinsslin](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/kevinsslin.md) |   | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
