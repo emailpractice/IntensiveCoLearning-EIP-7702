@@ -144,7 +144,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [xwwkk](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/xwwkk.md) | ✅ | | | | |
 | [bamboochen92518](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/bamboochen92518.md) | ✅ | | | | |
 | [keylen](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/keylen.md) |   | | | | |
-| [york](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/york.md) |   | | | | |
+| [york](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/york.md) | ✅ | | | | |
 | [Ellen](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/Ellen.md) |   | | | | |
 | [evshary](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/evshary.md) | ✅ | | | | |
 | [emailpractice](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/emailpractice.md) |   | | | | |
@@ -167,6 +167,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [chesley666](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/chesley666.md) | ✅ | | | | |
 | [kevinsslin](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/kevinsslin.md) |   | | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
