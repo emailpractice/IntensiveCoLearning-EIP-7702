@@ -19,7 +19,7 @@ timezone: UTC+8
 
 ### EIP-7702：概念入門與背景脈絡
 
-#### 🧠 為什麼需要帳戶抽象？Account Abstraction 的動機
+#### 為什麼需要帳戶抽象？Account Abstraction 的動機
 
 以太坊原生帳戶分為：
 - EOA（Externally Owned Account）：傳統錢包，只有私鑰，不能內建邏輯。
@@ -29,7 +29,7 @@ timezone: UTC+8
 - 讓 EOA 也能支援自訂邏輯（如多簽、限額、社交恢復）。
 - 支援批次交易、自訂驗簽邏輯、由 DApp 代付 Gas 等功能。
 
-#### ⛓ EIP-4337 回顧與限制
+#### EIP-4337 回顧與限制
 
 EIP-4337（Account Abstraction via EntryPoint contract）為第一代帳戶抽象方案，其設計包含：
 - **Bundler**：收集使用者操作（UserOperation）並統一送出。
@@ -41,7 +41,7 @@ EIP-4337（Account Abstraction via EntryPoint contract）為第一代帳戶抽�
 - 執行流程複雜、學習曲線高。
 - 不屬於 L1 協議層功能，執行效率與整合有限。
 
-#### 🔓 EIP-7702：核心概念與創新
+#### EIP-7702：核心概念與創新
 
 EIP-7702 是 Vitalik 主導的新提案，核心為：
 - 為 EOA 提供 **動態邏輯委派** 的能力。
@@ -53,7 +53,7 @@ EIP-7702 是 Vitalik 主導的新提案，核心為：
 - 無需在帳戶地址重新部署合約，即可為 EOA 附加執行邏輯。
 - 適合批次操作、gas 贊助、動態簽名驗證。
 
-#### 🔢 Type 4 新交易格式與比較
+#### Type 4 新交易格式與比較
 
 | 類型 | 名稱       | 特點                         | 對應 EIP    |
 |------|------------|------------------------------|-------------|
@@ -64,7 +64,7 @@ EIP-7702 是 Vitalik 主導的新提案，核心為：
 
 Type 4 是 7702 引入的專屬格式，允許一次性附加 delegation code pointer 與 authorization list。
 
-#### 🔗 delegation pointer 的格式與意義
+#### delegation pointer 的格式與意義
 
 EIP-7702 使用的 delegation pointer：
 ```
@@ -73,6 +73,7 @@ EIP-7702 使用的 delegation pointer：
 - `0xef0100` 是 prefix，代表這是一筆 delegation。
 - `address` 是被委託的邏輯合約位址。
 - 整體構成帳戶 `code` 欄位的內容，讓 EVM 執行時判斷要用 delegatecall 呼叫此地址。
+- 此機制使得 EOA 能像 proxy 一樣執行外部邏輯，並保留自身的 storage context、msg.sender、msg.value
 
 ### 2025.05.15
 
