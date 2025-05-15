@@ -66,4 +66,72 @@ timezone: UTC+8
 
 ### 2025.05.15
 
+本日學習內容：
+
+-   https://www.nethermind.io/blog/eip-7702-attack-surfaces-what-developers-should-know
+-   [A Deep dive into EIP-7702 with best practices](https://www.youtube.com/watch?v=uZTeYfYM6fM)
+
+> # Security Risks and Vulnerabilities
+>
+> 開發委託合約（delegate contract）本身並不直覺，以下是開發者需要知道關於 EIP-7702 的特性:
+>
+> -   多個 EOA 可以同時指向同一個委託合約（delegate contract）
+> -   用戶可以重新委託（redelegate），從一個委託合約切換到另一個。
+> -   EOA 擁有者可以將委託設為 address(0) 來清除程式碼，將帳戶恢復為「普通 EOA」。
+>
+> 以下是常見漏洞
+>
+> ## 1. Access Control
+>
+> ### 1.1 Lack of access control
+>
+> 若 delegate contract 缺乏存取控制（Access Control），任何人都能代表 EOA 執行任意邏輯，例如轉走資產。
+>
+> ```solidity
+> //SPDX-License-Identifier: MIT
+> pragma solidity 0.8.20;
+>
+> contract VulnerableContract {
+>   function doSomething(bytes memory _data, address _to, uint _value) public payable {
+>       (bool success, ) = \_to.call{value: \_value}(\_data);
+>       require(success);
+>   }
+> }
+> ```
+>
+> -   任何人都能調用 `doSomething`，執行任何目標合約的函式呼叫，包含轉走 EOA 下所有資產。
+>
+> ## 2. Initialization challenges
+>
+> ### 2.1 Constructors
+>
+> -   當 EOA 授權成為 delegate contract 時， EOA 並不會執行 delegate contract 中的 constructor，也是就說 EOA 無法靠 constructor 來進行參數初始化的動作。
+>
+> ```solidity
+> //SPDX-License-Identifier: MIT
+> pragma solidity 0.8.20;
+>
+> contract Random {
+>     uint a;
+>     constructor(uint _someNumber) {
+>         a = _someNumber;
+>     }
+> }
+>
+> ```
+>
+> 當 Alice 將 EOA 委派變成 Random 合約時，合約在委派過程中並不會執行 constructor。如果 Alice 想初始化變數，應該採用初始化函式（initialize pattern），類似 proxy 合約的初始化邏輯。
+>
+> ### 2.2 Front running and (re)initialization
+>
+> 如果 delegate contract 中的 `initialize` 函式無適當存取控制，可能會被惡意第三者進行 Front run 攻擊。
+>
+> ## 3. Storage collisions
+>
+> ### 3.1 Persistent state across redelegations and upgrades
+>
+> 當用戶重新委託或是恢復成為普通的 EOA 時，在委託成 delegate contract 時，所使用到的 storage 並不會被清除，而這可能會讓用戶在不同 delegate contract 切換時出現 storage collision 的問題。
+
+### 2025.05.16
+
 <!-- Content_END -->
