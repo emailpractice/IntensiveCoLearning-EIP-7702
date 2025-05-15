@@ -77,4 +77,66 @@ EIP-7702 使用的 delegation pointer：
 
 ### 2025.05.15
 
+### EIP-7702：Set Code Transaction
+
+#### Set Code Transaction 概述
+
+EIP-7702 引入了 Type 4 交易，一種新的交易格式，允許 EOA（Externally Owned Account）將帳戶行為委派給指定的邏輯合約。這是透過 `authorization_list` 欄位實現：該欄位中記錄的簽名授權資訊會讓帳戶的 `code` 欄位被設定為 `0xef0100 || address`，形成 delegation 指示器，使該帳戶具備如同 proxy 的行為能力。
+
+#### Type 4 交易格式
+
+Type 4 是基於 EIP-2718 的擴充格式，其交易結構如下：
+
+```js
+rlp([
+  chain_id,
+  nonce,
+  max_priority_fee_per_gas,
+  max_fee_per_gas,
+  gas_limit,
+  destination,
+  value,
+  data,
+  access_list,
+  authorization_list,
+  signature_y_parity,
+  signature_r,
+  signature_s
+])
+```
+
+其中 `authorization_list` 是由帳戶簽名的一組授權資料，用來指定委派邏輯：
+
+```js
+authorization_list = [
+  [chain_id, address, nonce, y_parity, r, s],
+  ...
+]
+```
+
+#### 授權驗證與 Delegation 設定流程
+
+當交易執行前，Ethereum 會依序處理 `authorization_list` 中的每一筆授權：
+
+1. 驗證 `chain_id` 是否為 0 或等於當前鏈 ID。
+2. 驗證 `nonce` 是否小於 2^64。
+3. 使用 `ecrecover` 驗證簽章並取得授權帳戶 `authority`。
+4. 驗證該帳戶的 `code` 欄位為空或已有 delegation。
+5. 若條件符合，設定帳戶 `code = 0xef0100 || address`。
+6. 若 `address == 0`，則代表清除 delegation，回復為一般 EOA。
+7. 將 `authority` 的 nonce 增加 1，防止重放攻擊。
+
+注意：即便交易邏輯 `revert`，上述 code 設定仍會生效不會被還原。
+
+#### Delegation 指示器的 EVM 行為
+
+當帳戶的 `code` 欄位為 `0xef0100 || address`（23 bytes），EVM 在執行該帳戶時會套用以下邏輯：
+
+- CALL / CALLCODE / DELEGATECALL / STATICCALL 這些指令，會跳轉至 delegation contract 的邏輯執行。
+- 執行邏輯時，仍保有原 EOA 的 `msg.sender`、`msg.value`、storage context。
+- CODESIZE / CODECOPY 等會從 delegation contract 讀取實際邏輯。
+- EXTCODESIZE / EXTCODECOPY / EXTCODEHASH 則仍讀取原帳戶自身資訊（僅看到 delegation indicator 的 23 bytes）。
+
+此機制讓 EOA 擁有像 proxy 合約的能力，但無需部署 smart contract 即可享有抽象帳戶邏輯。
+
 <!-- Content_END -->
