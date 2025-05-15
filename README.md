@@ -160,13 +160,14 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [alichaw](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/alichaw.md) | ✅ |   | | | |
 | [ygy-1231](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/ygy-1231.md) | ⭕️ |   | | | |
 | [luleigreat](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/luleigreat.md) | ✅ |   | | | |
-| [blahole](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/blahole.md) | ⭕️ |   | | | |
+| [blahole](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/blahole.md) | ✅ |   | | | |
 | [wodeche](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/wodeche.md) | ⭕️ |   | | | |
 | [helloworldsmart](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/helloworldsmart.md) | ✅ |   | | | |
 | [alexliao](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/alexliao.md) | ✅ |   | | | |
 | [chesley666](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/chesley666.md) | ✅ |   | | | |
 | [kevinsslin](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/kevinsslin.md) | ⭕️ |   | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
