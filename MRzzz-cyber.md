@@ -75,6 +75,41 @@ EIP 7702 对比 3074 会更加好
 
 
 ### 2025.05.15
+
+Gas 代付的实现，交易者和发起者可以是不一样的
+![image](https://github.com/user-attachments/assets/4f136e34-da8d-47c7-99b6-fa799d999c8a)
+
+如果同时授权多个条目，只有最后一个条目会实现，其他的被覆盖掉
+![image](https://github.com/user-attachments/assets/f1018444-6e2e-4222-a0a0-c85fa67cdc4f)
+
+
+执行方式
+![image](https://github.com/user-attachments/assets/1910f5a4-a778-449e-8d6c-4ee8890b31bd)
+
+整个实现过程，类似于 DelegateCall 合约
+![image](https://github.com/user-attachments/assets/219e3838-994f-4549-b327-d089274f4531)
+
+私钥依然是最高管理权限，如果你在部署完 7702 后，将私钥删除，依然无法找回你的账户
+
+Chain ID 如果为 0，那么你是可以在任何的支持 ERC-20 的 EVM 链进行同样操作的，但是同样的 Chain，在不同的链上的代码可能不一致，这时候如果遇见 Chain ID 为 0 的合约，就需要多加注意
+![image](https://github.com/user-attachments/assets/f2044657-bef6-4a70-8ce9-046e0f4c81eb)
+
+
+7702 可以允许其他用户来帮他发起一个委托交易
+![image](https://github.com/user-attachments/assets/c957e0fc-c25f-4b8c-9f18-caf89d17a202)
+
+
+![image](https://github.com/user-attachments/assets/8c3fc2ed-f67f-4b3c-9386-843ced478376)
+
+思考的思路：智能合约充值，智能合约加油站
+
+目前带给开发者一个问题：假设交易发起者是 EOA 钱包发起者将不再可行
+
+钓鱼产业的确会加剧
+
+我有一个疑问，当我委托给一个新的 EIP-7702 合约的时候，以前的老的那个合约会取消吗，明天再学习一下，然后看一看应用
+
+
 ### 2025.05.16
 ### 2025.05.17
 ### 2025.05.18
