@@ -87,4 +87,22 @@ timezone: UTC+8
 - https://eips.ethereum.org/EIPS/eip-7702
 - https://x.com/blainemalone/status/1893428082653962306
 
+### 2025.05.15
+
+#### 7702 對 UX 的影響
+
+回顧 7702 之前的 account 分成 EOA 和 Smart Wallet Account。EOA 主要流程是對 target contract 發起交易，並為交易簽名。這樣的流程使得 EOA 需要先有一些 ETH 作為手續費才可以使用：
+
+![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F0e13fc79-68f6-4250-ac7b-770fd24029db%2Fac7d5225-2a67-49e0-8788-0ae5ccd3d210%2Fimage.png/size/w=2000?exp=1747293492&sig=jH2hf3EM29JNlwlWFWi-KMT7rPKO4VJgwJ5s-Km7YF4&id=1f4098e3-5fa6-8016-99f4-e6d7e4548602&table=block&userId=b83e83cc-a393-4f23-82e9-22582fd02e8d)
+
+Smart Wallet Account 則是以 EOA 作為某個 Smart Contract Wallet 的 owner，Smart Contract Wallet 會驗證 msg.sender 或是簽名來執行或是呼叫其他的合約。Programmable Wallet 由此開始，可以在交易過程執行一些邏輯，例如多簽或是 batch transaction 等等：
+
+![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F0e13fc79-68f6-4250-ac7b-770fd24029db%2Fbd3fc784-08bb-422c-8bf7-bc82ae1ebd98%2Fimage.png/size/w=2000?exp=1747293581&sig=MtVUNMdLfSShyzVBveMOQDR3fKaWg7P9kvF1Bu64Uls&id=1f4098e3-5fa6-808c-90ff-d47e26697497&table=block&userId=b83e83cc-a393-4f23-82e9-22582fd02e8d)
+
+7702 上線後，EOA 可以同時做到上述 EOA 和 Smart Contract Wallet 的兩種行為。EOA 可以有擴充的邏輯可以使用，現在也支援其他簽名演算法。將 EOA 擴充成 4337 進而擴充 Wallet 的用途：
+
+![image.png](https://img.notionusercontent.com/s3/prod-files-secure%2F0e13fc79-68f6-4250-ac7b-770fd24029db%2Fc93bc3cc-0794-4502-9b79-d0bf0e7d1617%2Fimage.png/size/w=2000?exp=1747293605&sig=CQyGE6ievAM0BLLk7BnYL86YWwp5Te-2-R4Lpc1fXss&id=1f4098e3-5fa6-80e2-9b9b-e67859af1c31&table=block&userId=b83e83cc-a393-4f23-82e9-22582fd02e8d)
+
+### 2025.05.16
+
 <!-- Content_END -->
