@@ -16,7 +16,7 @@ timezone: UTC+8
 <!-- Content_START -->
 
 ### 2025.05.14
-EIP-7702
+#### EIP-7702
 Key Points
 1. What is EIP-7702
 2. How it works?
@@ -26,7 +26,7 @@ Key Points
 Note Link: https://github.com/Yorkchung/EIP-7702-Learning/blob/main/Day01.md
 
 ### 2025.05.15
-Security Risk of EIP-7702
+#### Security Risk of EIP-7702
 Key Points
 1. Private Key Leakage Risk
 2. Delegated Contract Vulnerabilities Affect All Delegators
@@ -45,11 +45,16 @@ Note Link: https://github.com/Yorkchung/EIP-7702-Learning/blob/main/Day02.md
 
 
 
+
+
 ### 2025.05.17
 
 
 
+
 ### 2025.05.18
+
+
 
 
 
