@@ -32,5 +32,33 @@ timezone: UTC+8
 
 
 ### 2025.05.15
+学习了[EIP-7702：深入探讨智能EOA及其实施示例](https://learnblockchain.cn/article/13256)，发现还有很多新的知识点需要去了解，笔记如下：
+
+1. EIP-7702引入新的交易类型 `SET_CODE_TX_TYPE` ( 0x04)，交易中有个`authorization_list`，是个授权列表:
+```
+authorization_list=[[chain_id,address,nonce,y_parity,r,s],…]
+```
+最终实现的效果是：
+- 从负载（chain_id，address,nonce）和签名（y_parity，r,s）恢复出来的EOA地址设置address字段的地址为委托地址
+- nonce值要与签名恢复出的EOA地址最新nonce一致，且每次授权后，nonce会+1
+- 如果委托地址没被授权，会消耗25000的Gas成本，如果已授权则会部分退款
+2. 撤销：用户可以利用 EIP-7702 修改授权地址。如果将 address 字段设置为 0x0000000000000000000000000000000000000000，则以往的授权将被撤销。这将清除账户的代码并将账户的代码哈希重置为空哈希。
+3. 重新委托时，通过ERC-7201避免了存储位置的冲突
+4. 查询交易状态，可以使用`eth_getTransactionReceipt`，查询当前授权，可以通过`eth_getCode`查询code，前缀为"0xef01"开头代表已设置代理地址
+5. 指令集修改，如果账户授权了代理，以下指令会：
+- EXTCODECOPY 仅返回0xef01
+- EXTCODESIZE 仅返回2
+- EXTCODEHASH 仅计算0xef01的Keccak256哈希
+- CALL,CALLCODE、DELEGATECALL、STATICCALL将从委托代码地址加载代码并在EOA的上下文中执行
+6. 与智能EOA交互，类似于调用智能合约，只需要将to字段设置为智能EOA地址
+
+
+#### 问题
+1. 如果A要设置B为委托地址，那么是A来签名一个授权，指定B为委托地址，然后放到`authorization_list`中，A再对整个交易签名、发送？这样A在一个交易中签名了两次，文章中说可以用这种签名解耦实现授权交易的Gas代付，没明白怎么操作
+2. 为什么授权交易中，是一个授权列表，而不是单个授权，什么场景下会有多个授权在一个交易中出现？
+3. 文章中提到 ERC-7201通过全名空间解决多次委托时存储位置冲突的问题，ERC-7201已经在主网上线了是吗
+4. 调用智能EOA，还得是智能EOA的私钥来签名交易吧？也就是tx.origin与交易中的to地址相同？
+5. 具体怎么实现与ERC-4337的兼容
+
 
 <!-- Content_END -->
