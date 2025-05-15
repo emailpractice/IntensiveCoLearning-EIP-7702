@@ -15,7 +15,7 @@ timezone: UTC+8
 <!-- Content_START -->
 
 ### 2025.05.14
-##了解账户抽象概念
+## 了解账户抽象概念
 1. 外部拥有账户（Externally Owned Accounts, EOAs）是以太坊区块链中最基础的账户类型，由用户通过私钥直接控制。与智能合约账户（Contract Accounts, 
 CAs）不同，EOAs的功能较为简单，主要用于发起交易、转账以太币（ETH）以及与智能合约交互。
 2. 智能合约账户（Contract Accounts, CAs）是以太坊区块链中的一种账户类型，与外部拥有账户（Externally Owned Accounts, EOAs）相对。与EOAs由私钥控制不同，CAs由部署在区块链上的智能合约代码控制，具备高度的可编程性和灵活性，能够实现复杂的逻辑和自动化操作。
