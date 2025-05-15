@@ -54,6 +54,34 @@ timezone: UTC+8
 | EIP‑7594 | Peer-to-Peer DAS            | P2P 数据可用性抽样，强化 L2 安全           |
 | …        | …                           | 其他如安全与开发者体验优化等                 |
 
-### 2025.07.12
+### 2025.05.15
+#### EIP‑7702 交易数据格式
+* 交易类型
+```
+TransactionType = 0x04（Set‑Code 交易）
+```
+* TransactionPayload
+```
+[
+  chain_id,
+  nonce,
+  max_priority_fee_per_gas,
+  max_fee_per_gas,
+  gas_limit,
+  destination,        // 不能为 null
+  value,
+  data,
+  access_list,       // 同 EIP‑4844
+  authorization_list,  
+  signature_y_parity,
+  signature_r,
+  signature_s
+]
+
+```
+* authorization_list
+```
+[ chain_id, address, nonce, y_parity, r, s ]
+```
 
 <!-- Content_END -->
