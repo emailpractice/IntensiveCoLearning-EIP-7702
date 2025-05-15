@@ -68,7 +68,18 @@ timezone: UTC+8
 
 ### 2025.05.15
 
-笔记内容
+參考資料：
+
+1. [EIP 7702 Example Guide](https://www.quicknode.com/guides/ethereum-development/smart-contracts/eip-7702-smart-accounts)
+2. [EIP 7702 Example Repo](https://github.com/quiknode-labs/qn-guide-examples/tree/main/ethereum/eip-7702)
+
+
+#### Build and Test Smart Accounts
+
+注意事項：
+
+1. 要先用`foundryup`把版本升到最新
+2. 要在`foundry.toml`加上`evm_version = "prague"`，才有支援EIP-7702的TransactionType之類的東西
 
 ### 2025.05.16
 
