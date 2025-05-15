@@ -167,7 +167,9 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [chesley666](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/chesley666.md) | ✅ |   | | | |
 | [kevinsslin](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/kevinsslin.md) | ⭕️ | ✅ | | | |
 | [zion](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/zion.md) | ✅ |   | | | |
+| [kris77z](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/kris77z.md) | ⭕️ |   | | | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
