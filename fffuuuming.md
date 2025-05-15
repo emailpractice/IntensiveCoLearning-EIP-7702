@@ -15,7 +15,6 @@ https://t.me/fffuuuming
 
 <!-- Content_START -->
 
-### 2025.07.11
 ### 2025-05-14
 #### Core idea of EIP-7702
 - **What** : Account Abstraction, allow EOAs to have code, which enable EOAs for batch operations, implementing native multisig, or alternative signature schemes
@@ -53,7 +52,7 @@ Delegating code does not clear existing storage
     - Ignore accountting for the old storage data
     - Storage collision : ```uint``` in the second contract will be interpreted as a ```bool```
 
-### 2025.07.12
+### 2025.05.15
 #### Some important notations
 - **Delegated code**: A smart contract implementation that an ```EOA``` points to and relies on to define its behavior
 - **Delegator account**: The ```EOA``` that initiates the transaction and delegates control to the delegated code during execution, still a regular ```EOA``` with a private key, but temporarily acts like a smart contract by borrowing logic from delegated code.
