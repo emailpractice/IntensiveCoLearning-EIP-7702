@@ -84,4 +84,100 @@ TransactionType = 0x04（Set‑Code 交易）
 [ chain_id, address, nonce, y_parity, r, s ]
 ```
 
+### 2025.05.16
+在本地 Anvil 节点上，通过 Alloy 库发送 EIP-7702 类型的交易
+```rust
+use alloy::{
+    eips::eip7702::Authorization,
+    network::{EthereumWallet, TransactionBuilder, TransactionBuilder7702},
+    node_bindings::Anvil,
+    primitives::U256,
+    providers::{Provider, ProviderBuilder},
+    rpc::types::TransactionRequest,
+    signers::{local::PrivateKeySigner, SignerSync},
+    sol,
+};
+use eyre::Result;
+
+// 使用 Solidity 合约代码生成 Rust 接口
+sol!(
+    #[allow(missing_docs)]
+    #[sol(rpc, bytecode = "608080604052...")]
+    contract Log {
+        #[derive(Debug)]
+        event Hello();
+        event World();
+
+        function emitHello() public {
+            emit Hello();
+        }
+
+        function emitWorld() public {
+            emit World();
+        }
+    }
+);
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    // 启动本地 Anvil 节点，启用 Prague 硬分叉
+    let anvil = Anvil::new().arg("--hardfork").arg("prague").try_spawn()?;
+
+    // 创建两个用户，Alice 和 Bob
+    let alice: PrivateKeySigner = anvil.keys()[0].clone().into();
+    let bob: PrivateKeySigner = anvil.keys()[1].clone().into();
+
+    // 使用 Bob 的钱包创建提供者
+    let rpc_url = anvil.endpoint_url();
+    let wallet = EthereumWallet::from(bob.clone());
+    let provider = ProviderBuilder::new().wallet(wallet).on_http(rpc_url);
+
+    // 部署 Alice 授权的合约
+    let contract = Log::deploy(&provider).await?;
+
+    // 创建授权对象，供 Alice 签名
+    let authorization = Authorization {
+        chain_id: U256::from(anvil.chain_id()),
+        address: *contract.address(),
+        nonce: provider.get_transaction_count(alice.address()).await?,
+    };
+
+    // Alice 对授权对象进行签名
+    let signature = alice.sign_hash_sync(&authorization.signature_hash())?;
+    let signed_authorization = authorization.into_signed(signature);
+
+    // 准备调用合约的 calldata
+    let call = contract.emitHello();
+    let emit_hello_calldata = call.calldata().to_owned();
+
+    // 构建交易请求
+    let tx = TransactionRequest::default()
+        .with_to(alice.address())
+        .with_authorization_list(vec![signed_authorization])
+        .with_input(emit_hello_calldata);
+
+    // 发送交易并等待广播
+    let pending_tx = provider.send_transaction(tx).await?;
+
+    println!("Pending transaction... {}", pending_tx.tx_hash());
+
+    // 等待交易被包含并获取收据
+    let receipt = pending_tx.get_receipt().await?;
+
+    println!(
+        "Transaction included in block {}",
+        receipt.block_number.expect("Failed to get block number")
+    );
+
+    assert!(receipt.status());
+    assert_eq!(receipt.from, bob.address());
+    assert_eq!(receipt.to, Some(alice.address()));
+    assert_eq!(receipt.inner.logs().len(), 1);
+    assert_eq!(receipt.inner.logs()[0].address(), alice.address());
+
+    Ok(())
+}
+
+```
+
 <!-- Content_END -->
