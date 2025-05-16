@@ -37,6 +37,38 @@ EIP-7702 是為了讓傳統 EOA具備智慧帳戶能力而提出的提案，概�
 
 ### 2025.05.17
 
+1. 閱讀 https://hackmd.io/@colinlyguo/SyAZWMmr1x
+
+```
+contract Proxy {
+    address immutable implementation;
+
+    constructor(address impl) {
+        implementation = impl;
+    }
+
+    fallback() external payable {
+        address impl = implementation;
+        assembly {
+            calldatacopy(0, 0, calldatasize())
+            let result := delegatecall(gas(), impl, 0, calldatasize(), 0, 0)
+            returndatacopy(0, 0, returndatasize())
+            switch result
+            case 0 { revert(0, returndatasize()) }
+            default { return(0, returndatasize()) }
+        }
+    }
+}
+```
+
+2.Idea發想
+
+Session Key可以使用在DeFi登入，減少User friction並增加交易速度
+結合access control限制session key使用情境
+
+例如Game Fi如果需要短時間內多次跟合約互動特定function，就可以使用
+
+
 ### 2025.05.18
 
 
