@@ -84,7 +84,9 @@ proxy poxy 會怎樣? 講者也還不知道
 there is no 7702 implementation is this repo right?  And that is normal because it is better done by third party wallet?  
 
 actions/BatchSupply.tsx :  
+
 // 一、 先打包資料
+
 const handleSupply = async () => {
   const approveData = encodeFunctionData({
     abi: IERC20_ABI,
@@ -96,8 +98,8 @@ const handleSupply = async () => {
     functionName: 'supply',
     args: [AaveV3Sepolia.ASSETS.AAVE.UNDERLYING, tokenBalance, address || '0x0', 0]
   });
+  
   // 二 send call送出交易 sendcalls 會自動調用MetaMask、或其他兼容 EIP-4337 / EIP-7702 的錢包，跳出來讓用戶簽名。  
-
   
   下面似乎就等同於 
   //IERC20(token).approve(poolAddress, tokenBalance);
@@ -114,6 +116,7 @@ const handleSupply = async () => {
         },],
 
         // 三、paymaster不知道是怎麼實作的  目前就是看到.env裡面有一個paymaster的連結 
+        
         capabilities: {
           paymasterService: {
             [toHex(chainId)]: {
