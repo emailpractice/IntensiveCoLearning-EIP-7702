@@ -59,7 +59,6 @@ ________________________________________
 
 ### 2025.05.15
 auth list可以放很多個，但只有最後一個會生效。  
-
 proxy poxy 會怎樣? 講者也還不知道
 
 智能合約能做到的功能都能做吧，真的要思考的事情是"插件的來源"，因為目前對 proxy 合約的格式沒有規範，用戶完全可能簽到惡意合約。而且地址是可以做到仿造得很像知名協議的，如果前端的錢包應用沒有主動在簽名的時候提供一些檢查。 比如顯示這個地址是不是知名協議， 7702 對一般用戶是很難使用的，因為要檢查合約地址真的太費神了
@@ -74,6 +73,64 @@ proxy poxy 會怎樣? 講者也還不知道
 
 給自己設定一個轉帳門檻嗎 讓自己無論如何都只能轉出這麼多錢 : 
     自動化每筆交易都delegate call 一個proxy合約來為我檢查。  用其他的技術更實在，7702 就是拿來客製化"單筆"交易的
+    ________________________________________
+### 2025.05.16   how to implement 
+
+參考別人的打包交易實作 https://github.com/defispartan/approve/blob/main/app/actions/Permit.tsx
+但這是一個EIP 5792 交易是送給另一個合約。 到那邊才會用到 7702 的邏輯， delegate call之類的)  看不到 7702 的 delegatecall 的原因：不是自己實作 7702 的錢包邏輯。
+這個repo就負責打包交易送出交易。  
+他這邊好像就是送出交易給錢包而已，可能是ㄧ些主流的錢包吧 比如alchemy 或 metamask 然後他們那邊會自動判斷，如果送交易的是EOA 它就會用7702的方式去幫現在的合約進入delegate call
+疑惑 : all batch supply of the repo does is send an EIP-5792 transaction, and the wallet (e.g., MetaMask) handles the 7702 implementation under the hood?
+there is no 7702 implementation is this repo right?  And that is normal because it is better done by third party wallet?  
+
+actions/BatchSupply.tsx :  
+// 一、 先打包資料
+const handleSupply = async () => {
+  const approveData = encodeFunctionData({
+    abi: IERC20_ABI,
+    functionName: 'approve',
+    args: [AaveV3Sepolia.POOL,tokenBalance]
+  });
+  const supplyData = encodeFunctionData({
+    abi: IPool_ABI,
+    functionName: 'supply',
+    args: [AaveV3Sepolia.ASSETS.AAVE.UNDERLYING, tokenBalance, address || '0x0', 0]
+  });
+  // 二 send call送出交易 sendcalls 會自動調用MetaMask、或其他兼容 EIP-4337 / EIP-7702 的錢包，跳出來讓用戶簽名。  
+
+  
+  下面似乎就等同於 
+  //IERC20(token).approve(poolAddress, tokenBalance);
+  //pool.supply(token, amount, userAddress, 0);
+  
+    sendCalls({
+      calls: [ {
+          to: AaveV3Sepolia.ASSETS.AAVE.UNDERLYING,
+          data: approveData,
+        },
+        {
+          to: AaveV3Sepolia.POOL,
+          data: supplyData,
+        },],
+
+        // 三、paymaster不知道是怎麼實作的  目前就是看到.env裡面有一個paymaster的連結 
+        capabilities: {
+          paymasterService: {
+            [toHex(chainId)]: {
+              optional: true,
+              url: paymasterUrl,
+            }
+          }
+      },  
+  })
+  }
+
+  actions/Permit.tsx : await signTypedData({ domain, types, message })    有提供先讓使用者預先簽名的功能。 這樣使用者如果採用傳統的交易(approve再轉帳)而不是打包交易，那原本會需要用到兩次的 gas fee 。就是先approve，消耗掉一次gas。再交易 。  permit 就是在試著做到鍊下簽名: 我先取得用戶的簽名，然後之後就直接送出交易，不需要預先approve。 付出一次gas fee就好。
+
+  note簽名的內容跟簽名要在一起，一起去生成一組 v r s 
+  note 如果沒有透明顯示簽名內容，使用者以為自己簽了5 token  但實際上簽了100 token
+
+state/TokenProvider.tsx :  從permit拿到簽名，然後儲存資料在前端瀏覽器(本地)的樣子。 簽名存在這裡，  刪除簽名資料、查看餘額 等等的功能好像也在這個檔案
 
 ### 2025.07.12
 
