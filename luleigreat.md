@@ -61,4 +61,16 @@ authorization_list=[[chain_id,address,nonce,y_parity,r,s],…]
 5. 具体怎么实现与ERC-4337的兼容
 
 
+### 2025.05.16
+
+今天通过观看[Slowmist对EIP-7702的代码解析](https://www.youtube.com/watch?v=uZTeYfYM6fM)视频，以及查询一些其它资料，解答了昨天一些疑惑：
+1. 需要明确的是，每个账户只能设置一个代理地址，如果设置多个，后面的会覆盖前面，最终只有一个会生效
+2. 授权列表有多个，是一种批量授权的场景（同时解决了Gas代付问题），比如A，B，C，D都要设置地址X为代理地址，但是A-D账户都没有ETH，那么可以分别签署授权，然后把签名及授权payload交给一个有ETH的账户，一起发送到链上，同时实现对4个账户的授权操作
+3. ERC-7201是一种合约规范，像ERC-4337一样，是没有修改链上实现的，需要开发者自己通过合约实现，具体的还得再研究下[ERC-7201 Storage Namespaces Explained](https://www.rareskills.io/post/erc-7201)
+4. EIP-7702还是需要与ERC-4337配合才能实现Gas代付、批量交易等功能，智能EOA只能取代ERC-4337中的钱包账户能力（EOA + CA)
+
+
+#### 问题
+1. 设置完代理合约地址后，智能EOA账户自己可以调用自己来修改合约状态存储，如果是其它账户调用智能EOA呢，会修改其它账户的状态存储还是智能EOA账户的
+
 <!-- Content_END -->
