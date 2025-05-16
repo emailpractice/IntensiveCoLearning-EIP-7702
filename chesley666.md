@@ -40,10 +40,10 @@ gas替付等能力：可以使用代币或者第三方等结算gas
 EIP-7702 集成更精简，而 EIP-4337 提供更全面的账户抽象模型，两者可针对不同场景共存。7702无需中转合约调用，相比4337多次合约调用，bundler打包，消耗更少的gas。7702需要通过硬分叉，节点、rpc、钱包都需要升级才能支持，而4337目前已经支持。[参考](https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmjY2jvEW_7g8YxYMQaHvqm9Xw_o)
 
 ### 2025.05.15  
-2. 安全相关  
+2. 安全相关: [8类安全问题](https://github.com/Yorkchung/EIP-7702-Learning/blob/main/Day02.md#security-risk-of-eip-7702)
 - 存储冲突：修改授权合约时，要确保修改前后合约存储的slot内容对应一致，[slot相关介绍](https://mixbytes.io/blog/collisions-solidity-storage-layouts)，或者利用ERC7201，使用[存储命名空间](https://www.rareskills.io/post/erc-7201)来避免冲突
 - 骗gas的爆破？【待实践】
-- 老的链上合约，有些使用tx==msg.sender来检验交易是否合法，在7702升级之后需要升级合约，因为存在7702的账户在和这种老合约交互的时候，msg.sender并不一定是真实用户的地址
+- 老的链上合约，有些使用require(msg.sender == tx.origin)来检验交易是否合法，在7702升级之后需要升级合约，因为存在7702的账户在和这种老合约交互的时候，tx.origin并不一定是真实用户的地址
 3. 链上数据浏览
 - [okx的代理合约](https://etherscan.io/address/0x80296FF8D1ED46f8e3C7992664D13B833504c2Bb)
 ```solidity
@@ -56,9 +56,12 @@ modifier onlySelf() {
     _;
 }
 ```
-- [设置7702的EOA](https://holesky.etherscan.io/tx/0x29252bf527155a29fc0df3a2eb7f5259564f5ee7a15792ba4e2ca59318080182) 对比 [取消设置的EOA](https://holesky.etherscan.io/tx/0xd410d2d2a2ad19dc82a19435faa9c19279fa5b96985988daad5d40d1a8ee2269#authorizationlist)
+- [设置7702的EOA](https://holesky.etherscan.io/tx/0x29252bf527155a29fc0df3a2eb7f5259564f5ee7a15792ba4e2ca59318080182) 对比 [取消设置的EOA](https://holesky.etherscan.io/tx/0xd410d2d2a2ad19dc82a19435faa9c19279fa5b96985988daad5d40d1a8ee2269#authorizationlist)(代理合约地址0x0..0，注意和chainid=0区分)  
+取消代理2：直接把 code hash 重設為空值，真正回歸純 EOA
 
 ### 2025.05.16
+3. 协议实现细节：[交易流程](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/wayhome.md#20250516)
+4. [gas成本为什么是12500](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/universe-ron.md#2-gas-%E5%B8%B3%E6%9C%AC---%E7%82%BA%E4%BD%95%E8%A6%81%E6%94%B6-12-500)
 
 ### 2025.05.17
 
