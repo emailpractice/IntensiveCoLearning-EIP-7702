@@ -371,4 +371,38 @@ It first generate EOA by [generating a random private key](https://github.com/it
 2. Submission by 3rd-party
 3. Preventing signing key tampering
 ---
+
+### 2025.05.16
+#### Best Practice
+- **Private Key Management**
+Locally deleting the private key can't eliminate the risk of leakage, especially in **supply chain attack**
+    - Use [draft-EIP-7851](https://eips.ethereum.org/EIPS/eip-7851) to deactivate/re-activate
+- **Mutiple Chain Replay**
+Same contract address may have different implementation code across chain, wallet service providers should 
+    - check whether the chain of the delegation matches the current network
+    - warn users about the risks of delegations signed with a chain ID of 0 that could be replayed across different chains.
+- **Initialization issue**
+Unlike traditional contract deployments, EIP-7702 does **not** support running `initcode` or invoking initialization functions when assigning code to an EOA via delegation
+    - **Normal contracts** can be deployed with `CREATE` or `CREATE2`, which runs `initcode` to:
+      - Set initial **contract code**
+      - Perform **custom setup logic**
+    - **EIP-7702** only updates the **code** of the EOA by pointing it to an existing contract, so it does **not** execute any initialization logic — meaning:
+      - Storage slots remain **unset**
+      - No constructor or `initialize()` function can be called during delegation
+  - Initialization must be done **manually in a follow-up transaction**
+    - Frontrun scenario
+    - SC wallet developers must verify the initial calldata to the account for setup purposes be signed by the EOA’s key using ecrecover
+- **Storage Management during re-delagation**
+    - [ERC-7201: Namespaced Storage Layout](https://eips.ethereum.org/EIPS/eip-7201)
+    - [ERC-7779: Interoperable Delegated Accounts](https://eips.ethereum.org/EIPS/eip-7779)
+- **Setting code as ```tx.origin```**
+Allowing the sender of an EIP-7702 to also set code has the possibility so a user’s account can freely convert between an EOA and a smart contract
+    - Break atomic sandwich protections which rely on ```tx.origin```;
+    - Break reentrancy guards of the style ```require(tx.origin == msg.sender)```
+    - Developers should assume that future participants may all be smart contracts during the development process.
+- **Contract Compatibility**
+Need to implement the corresponding fallbck function ot receive token based on ERC-721 and ERC-777 tokens
+#### Reference
+- [In-Depth Discussion on EIP-7702 and Best Practices](https://defihacklabs.substack.com/p/in-depth-discussion-on-eip-7702-and)
+- [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702)
 <!-- Content_END -->
