@@ -105,4 +105,17 @@ Smart Wallet Account 則是以 EOA 作為某個 Smart Contract Wallet 的 owner�
 
 ### 2025.05.16
 
+#### Best Practice
+
+- Private Key Management
+    - 透過 7702 委託後，雖然可以合約錢包實作的 social recovery 機制來取回權限，但是 EOA 還是有非常高的權限，像是撤銷 7702 委託，所以 Private Key 依舊要保管好
+- Storage Management
+    - 根據 7702，撤銷委託只會清除 code region 不會清除 contract storage。對錢包開發者來說，需要 storage 時需要特別注意 storage layout 的規劃
+- Initialization Issue
+    - 使用 7702 委託，只會更新 code region，並沒有額外函式可以為 code region 做初始化。
+    - 在 7702 委託後，如果要做初始化，開發者應在初始化期間做檢查。
+    - 如果是委託給 4337 錢包，確保是使用 0.8 的 EntryPoint (有實作兼容 7702)
+
+### 2025.05.17
+
 <!-- Content_END -->
