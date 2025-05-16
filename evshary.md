@@ -78,4 +78,40 @@ timezone: UTC+8
 簡單來說，EIP-7702 是讓使用者最低成本享受到智能合約功能的方式，不像是 EIP-4337 需要重新創個帳戶。
 至於 EIP-6551 則只是針對 NFT，這就是另一個故事了。
 
+### 2025.05.16
+
+#### EIP-7702 實際封包差異
+
+在 EIP-2718 前的格式(Type 0, Legacy Transaction)為如下：
+[nonce, gasPrice, gasLimit, to, value, data, v, r, s]
+
+而在 EIP-2718 之後則引入了 Typed Transactions，允許有多種交易種類。
+當地一個 byte 小於 0x7f，表示是 EIP-2718 定義的 typed transaction，常見有如下幾種：
+
+* (0x01) Type 1 (EIP-2930 Access List Transaction)：增加 AccessList 欄位
+* (0x02) Type 2 (EIP-1559 Transaction): 引入了新的 Gas 費用機制
+* (0x03) Type 3 (EIP-4844 Blob Transaction): 用來處理大量的 Blob 數據
+* (0x04) Type 4 (EIP-7702): 也就是我們要探討的主角
+
+下面是 EIP-7702 的格式：
+[chain_id, nonce, max_priority_fee_per_gas, max_fee_per_gas, gas_limit, destination, value, data, access_list, authorization_list, signature_y_parity, signature_r, signature_s]
+
+最主要核心是增加了 authorization_list，這個列表，包含了多個 authorization tuples，每個 tuple 有如下資訊
+
+* chain_id: 鏈的 ID
+* address: 被授權執行程式碼的智能合約位置
+* nonce: EOA 的 nonce
+* y_parity, r, s: 對特定訊息的簽名，用於授權
+
+destination 不能為空，代表不能是創建合約的交易。另外 authorization_list 也不能為空。
+讓我們用 Gas 贊助的例子來說明 destination 和 authorization_list 的差異：
+
+1. EOA 發起 EIP-7702 交易，destination 是目標智能合約、authorization_list 包含 Gas 贊助智能合約的地址
+2. 該 authorization tuples 會包含 EOA 簽名，代表有授權給贊助地址
+3. EVM 會驗證 authorization_list 的 Gas 贊助智能合約
+4. Gas 贊助智能合約會以某種形式為交易支付 Gas 費用
+5. 交易成功送出，原發送者仍為該 EOA，但 Gas 成本由授權合約負擔
+
+雖然交易由 EOA 簽名發出，但授權合約可以攔截交易並代為執行、支付 Gas，類似於 Account Abstraction 的使用者操作（UserOperation）行為
+
 <!-- Content_END -->
