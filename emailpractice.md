@@ -7,7 +7,7 @@ timezone: UTC+8
 
 # 你的名字
 
-1. 自我介绍   seashell，在工作之餘學習了 smart contract audit 兩個月，目前嘗試了兩次審計比賽跟一次 codehawk 的 first flight
+1. 自我介绍   seashell，在工作之餘學習了 smart contract audit 兩個月，目前嘗試了兩次審計比賽跟一次 codehawk 的 first flight.
 2. 你认为你会完成本次残酷学习吗？ 會
 3. 你的联系方式（推荐 Telegram） https://t.me/emailpractice
 
