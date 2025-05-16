@@ -74,7 +74,8 @@ proxy poxy 會怎樣? 講者也還不知道
 給自己設定一個轉帳門檻嗎 讓自己無論如何都只能轉出這麼多錢 : 
     自動化每筆交易都delegate call 一個proxy合約來為我檢查。  用其他的技術更實在，7702 就是拿來客製化"單筆"交易的
     ________________________________________
-### 2025.05.16   how to implement 
+### 2025.05.16
+how to implement 
 
 參考別人的打包交易實作 https://github.com/defispartan/approve/blob/main/app/actions/Permit.tsx
 但這是一個EIP 5792 交易是送給另一個合約。 到那邊才會用到 7702 的邏輯， delegate call之類的)  看不到 7702 的 delegatecall 的原因：不是自己實作 7702 的錢包邏輯。
