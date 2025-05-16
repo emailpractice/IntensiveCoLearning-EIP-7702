@@ -85,7 +85,7 @@ there is no 7702 implementation is this repo right?  And that is normal because 
 
 actions/BatchSupply.tsx :  
 
-// 一、 先打包資料
+  // 一、 先打包資料
 
 const handleSupply = async () => {
   const approveData = encodeFunctionData({
@@ -115,7 +115,7 @@ const handleSupply = async () => {
           data: supplyData,
         },],
 
-        // 三、paymaster不知道是怎麼實作的  目前就是看到.env裡面有一個paymaster的連結 
+  // 三、paymaster不知道是怎麼實作的  目前就是看到.env裡面有一個paymaster的連結 
         
         capabilities: {
           paymasterService: {
@@ -128,7 +128,7 @@ const handleSupply = async () => {
   })
   }
 
-<pre> ```ts // 一、先打包資料 const handleSupply = async () => { const approveData = encodeFunctionData({ abi: IERC20_ABI, functionName: 'approve', args: [AaveV3Sepolia.POOL, tokenBalance] }); const supplyData = encodeFunctionData({ abi: IPool_ABI, functionName: 'supply', args: [AaveV3Sepolia.ASSETS.AAVE.UNDERLYING, tokenBalance, address || '0x0', 0] }); // 二、send call送出交易 sendCalls({ calls: [ { to: AaveV3Sepolia.ASSETS.AAVE.UNDERLYING, data: approveData, }, { to: AaveV3Sepolia.POOL, data: supplyData, } ], // 三、Paymaster 設定（目前看到的） capabilities: { paymasterService: { [toHex(chainId)]: { optional: true, url: paymasterUrl, } } }, }); } ``` </pre>
+
 
   actions/Permit.tsx : await signTypedData({ domain, types, message })    有提供先讓使用者預先簽名的功能。 這樣使用者如果採用傳統的交易(approve再轉帳)而不是打包交易，那原本會需要用到兩次的 gas fee 。就是先approve，消耗掉一次gas。再交易 。  permit 就是在試著做到鍊下簽名: 我先取得用戶的簽名，然後之後就直接送出交易，不需要預先approve。 付出一次gas fee就好。
 
