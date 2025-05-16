@@ -23,6 +23,42 @@ t.me/wayhome
 
 <!-- Content_START -->
 
+### 2025.05.16
+
+交易流程:
+
+```mermaid
+sequenceDiagram
+    participant 钱包客户端
+    participant 智能账户
+    participant 实现合约
+    participant 赞助者（可选）
+
+    Note over 钱包客户端: 步骤 1：生成授权签名
+    钱包客户端->>钱包客户端: signAuthorization({ contractAddress })
+    钱包客户端-->>智能账户: 针对实现合约字节码的签名授权
+
+    Note over 智能账户: 步骤 2：临时分配字节码
+    智能账户->>实现合约: 使用实现合约字节码
+    智能账户-->>智能账户: 临时升级为智能合约
+
+    Note over 智能账户: 步骤 3：构造交易
+    智能账户->>智能账户: 构建交易
+    智能账户->>智能账户: to = 智能账户地址
+    智能账户->>智能账户: data = encodeFunctionData('execute', [calls])
+
+    Note over 智能账户: 步骤 4：执行交易
+    alt 直接执行
+        智能账户->>智能账户: 发送包含授权列表的交易
+    else 赞助执行
+        赞助者（可选）->>赞助者（可选）: 使用相同的签名授权
+        赞助者（可选）->>智能账户: 赞助者代表智能账户发送交易
+    end
+
+    Note over 智能账户: 步骤 5：恢复为普通 EOA
+    智能账户->>智能账户: 恢复为原始 EOA 状态
+  ```
+
 ### 2025.05.15
 
 ## 协议实现细节
