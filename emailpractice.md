@@ -87,8 +87,8 @@ actions/BatchSupply.tsx :
 
   // 一、 先打包資料
 
-const handleSupply = async () => {
-  const approveData = encodeFunctionData({
+ const handleSupply = async () => {
+   const approveData = encodeFunctionData({
     abi: IERC20_ABI,
     functionName: 'approve',
     args: [AaveV3Sepolia.POOL,tokenBalance]
