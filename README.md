@@ -128,7 +128,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [jameelovecat](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/jameelovecat.md) | ⭕️ | ⭕️ | ❌ | | |
 | [k66](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/k66.md) | ✅ | ⭕️ | ✅ |   | |
 | [Jack-OuCJ](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/Jack-OuCJ.md) | ✅ | ✅ | ✅ | ✅ | |
-| [wayhome](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/wayhome.md) | ✅ | ✅ | ✅ |   | |
+| [wayhome](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/wayhome.md) | ✅ | ✅ | ✅ | ✅ | |
 | [nx-xn2002](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/nx-xn2002.md) | ✅ | ✅ | ⭕️ |   | |
 | [qiaopengjun5162](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/qiaopengjun5162.md) | ✅ | ✅ | ✅ | ✅ | |
 | [MRzzz-cyber](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/MRzzz-cyber.md) | ✅ | ✅ | ✅ |   | |
@@ -157,7 +157,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [narnona](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/narnona.md) | ⭕️ | ⭕️ | ❌ | | |
 | [nghdavid](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/nghdavid.md) | ⭕️ | ✅ | ✅ |   | |
 | [easyshellworld](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/easyshellworld.md) | ✅ | ✅ | ✅ | ✅ | |
-| [alichaw](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/alichaw.md) | ✅ | ✅ | ⭕️ |   | |
+| [alichaw](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/alichaw.md) | ✅ | ✅ | ✅ | ✅ | |
 | [ygy-1231](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/ygy-1231.md) | ⭕️ | ⭕️ | ❌ | | |
 | [luleigreat](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/luleigreat.md) | ✅ | ✅ | ✅ |   | |
 | [blahole](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/blahole.md) | ✅ | ✅ | ✅ | ✅ | |
@@ -169,6 +169,7 @@ https://mirror.xyz/0x9FFC14AB8754E4De3b0C763F58564D60f935Ad6F/eiLgBj9iPFmy4s4bmj
 | [zion](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/zion.md) | ✅ | ✅ | ✅ | ✅ | |
 | [kris77z](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/kris77z.md) | ⭕️ | ✅ | ✅ | ✅ | |
 <!-- END_COMMIT_TABLE -->
+
 
 
 
