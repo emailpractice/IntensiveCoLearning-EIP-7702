@@ -157,5 +157,57 @@ timezone: UTC+8
 > ## Multi-chain Replay
 >
 > -   當將 EOA 進行委託時，可以透過簽名中的 chainId 指定授權僅適用於特定鏈。然而，若將 chainId 設為 0，則表示用戶同意該授權在所有鏈上皆可生效，實現跨鏈授權的效果。但需要特別注意的是，即使同一地址在不同鏈上看似一致，實際上的實作細節可能存在差異。因此，在允許多鏈共用同一份授權時，務必特別謹慎，以避免潛在的安全風險或行為不一致的問題。
+>
+> ## Storage Management
+>
+> EIP-7702 切換或撤銷委託只會清除 code region，並不會清除掉 EOA 下使用過的 storage。
+>
+> -   對用戶來說，因為當前並沒有標準的安全切換 delegate contract 流程，因此在切換新的 delegate contract 前，最好是能確保 delegate contract 本身的開發團隊信良好，並且不要在 EOA 下保留太多資金。
+> -   對開發者來說，在開發過程中可以遵循 ERC-7201，盡可能減少 Storage Collision 帶來的風險。
+> -   對錢包廠商來說，如果 ERC-7779 後續有通過提案的話，可遵循提案的標準流程在每次切換委託時，都先將使用過的 storage 清除掉。
+>
+> ## Account Conversion
+>
+> -   在 EIP-7702 之後，EOA 帳戶具有智能合約的功能，意味著過去對於 `tx.origin` 一定是來自單純的 EOA （即 code region 為空）這項假設將不再成立。
+> -   因此過去用來判斷單純 EOA 假設的方式： `tx.origin == msg.sender` 的方式也將不再可靠。
+
+### 2025.05.17
+
+本日學習內容：
+
+-   [EIP-7702: A Deep Dive into Smart EOAs with Implementation Examples](https://hackmd.io/@colinlyguo/SyAZWMmr1x)
+
+> # Introduction
+>
+> EIP-7702 為一般 EOA 帶來了許多可能性，以下是一些有趣的功能：
+>
+> -   社交恢復（Social Recovery）
+>     -   適合擔心私鑰遺失的用戶。
+>     -   可透過信任人群或設定機制恢復控制權。
+> -   交易批次處理（Transaction Batching）
+>     -   簡化交易流程，例如合併 ERC-20 的 approve + transfer。
+>     -   更高效的 Token 操作。
+> -   交易贊助（Transaction Sponsorship）
+>     -   支援第三方代付 gas，如 Sequencer 或 Wallet Server。
+>     -   對沒有原生代幣的用戶更加友善。
+> -   任意簽章機制（Arbitrary Signing Keys）
+>     -   可支援多種鑰匙格式，如 WebAuthn、P256、BLS 等。
+>     -   提供更多安全與創新空間。
+> -   Session Keys 支援
+>     -   可設定有效期與操作範圍的臨時密鑰。
+>     -   強化安全性、減少釣魚攻擊風險。
+>     -   適合 DApp 沙箱操作與訂閱模型。
+>
+> # 與 ERC-4337 的整合性
+>
+> -   EIP-7702 可與 ERC-4337 完美整合。
+> -   Smart EOAs 可直接用作 UserOperation.sender 欄位。
+> -   利於開發者使用現有基礎設施，推動新功能落地。
+>
+> # 安全性討論
+>
+> -   EIP-7702 雖然可透過社交恢復的方式來解決私鑰遺失的問題，但仍無法解決私鑰洩漏的問題，因為私鑰對 EOA 仍然具有最高權限的控制權
+> -   目前社區有提案 [EIP-7851](https://eips.ethereum.org/EIPS/eip-7851) 希望能夠允許禁用/啟用私鑰對於委託狀態下 EOA 的控制權
+> -   不過提案目前還尚未通過，目前建議的做法是用戶授權完 EOA 變成 delegate contract 後，就直接棄用私鑰不在任何地方保存備份，以降低私鑰外洩的可能性。
 
 <!-- Content_END -->
