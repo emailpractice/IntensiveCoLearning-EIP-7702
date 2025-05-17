@@ -23,6 +23,146 @@ t.me/wayhome
 
 <!-- Content_START -->
 
+### 2025.05.17
+
+## 测试 EIP-7702 交易
+
+1. 编写合约
+
+- 批量处理执行逻辑
+
+```solidity
+/// @notice 代表批量调用中的单个调用。
+struct Call {
+    address to;
+    uint256 value;
+    bytes data;
+}
+
+/**
+     * @notice 直接执行一批调用。
+     * @dev 此函数旨在供智能账户本身（即 address(this)）调用合约时使用。它检查 msg.sender 是否为合约本身。
+     * @param calls 包含目标地址、ETH 值和 calldata 的 Call 结构体数组。
+     */
+function execute(Call[] calldata calls) external payable {
+    require(msg.sender == address(this), "Invalid authority");
+    _executeBatch(calls);
+}
+
+
+/**
+ * @notice 内部函数，用于执行批量调用。
+ * 合约使用一个随机数（nonce）来防止重放攻击。每次成功执行后，随机数（nonce）都会递增。如果没有实现随机数
+ *（nonce），攻击者可能会多次重放同一笔交易
+ */
+function _executeBatch(Call[] calldata calls) internal {
+    uint256 currentNonce = nonce;
+    nonce++;
+
+    for (uint256 i = 0; i < calls.length; i++) {
+        _executeCall(calls[i]);
+    }
+
+    emit BatchExecuted(currentNonce, calls);
+}
+
+
+    /**
+     * @dev 内部函数，用于执行单个调用。
+     * @param callItem 包含目标地址、价值和调用数据的 Call 结构体。
+     */
+function _executeCall(Call calldata callItem) internal {
+    (bool success,) = callItem.to.call{value: callItem.value}(callItem.data);
+    require(success, "Call reverted");
+    emit CallExecuted(msg.sender, callItem.to, callItem.value, callItem.data);
+}
+```
+
+- 签名验证逻辑
+
+```solidity
+bytes32 digest = keccak256(abi.encodePacked(nonce, encodedCalls));
+require(ECDSA.recover(digest, signature) == msg.sender, "Invalid signature");
+```
+
+- 直接执行或赞助执行
+
+```solidity
+function execute(Call[] calldata calls) external payable {
+    // The caller executes the calls directly
+}
+function execute(Call[] calldata calls, bytes calldata signature) external payable {
+    // A sponsor executes the calls on behalf of the caller
+}
+
+```
+
+2. 运行本地网络
+
+```bash
+anvil --hardfork prague
+```
+
+3.构建合约
+
+```bash
+forge install && forge build
+```
+
+4. 运行部署脚本
+
+```bash
+forge script ./script/BatchCallAndSponsor.s.sol --tc BatchCallAndSponsorScript --broadcast --rpc-url 127.0.0.1:8545
+```
+
+输出如下:
+
+```bash
+Chain 31337
+
+Estimated gas price: 2.000000001 gwei
+
+Estimated total gas used for script: 2718876
+
+Estimated amount required: 0.005437752002718876 ETH
+
+==========================
+
+##### anvil-hardhat
+✅  [Success] Hash: 0xf0c214e5c056c6815c8ba0df3b810ebc9a2496e48616ffd484455849b26e4fb1
+Contract Address: 0x8464135c8F25Da09e49BC8782676a84730C318bC
+Block: 1
+Paid: 0.001049548001049548 ETH (1049548 gas * 1.000000001 gwei)
+
+
+##### anvil-hardhat
+✅  [Success] Hash: 0x6436bc2bfab0f3a1dc501f71963b79d41223db5c24d3a4db2fe2c3635e3d221d
+Contract Address: 0x71C95911E9a5D330f4D621842EC243EE1343292e
+Block: 2
+Paid: 0.000810267154290925 ETH (916855 gas * 0.883746235 gwei)
+
+
+##### anvil-hardhat
+✅  [Success] Hash: 0x7d15797f21602e8b76d9210df673ee68bdc5850304553264f428c41f90086c86
+Block: 3
+Paid: 0.000053771380665105 ETH (68935 gas * 0.780030183 gwei)
+
+
+##### anvil-hardhat
+✅  [Success] Hash: 0x652de80051db83a07e0f64c03eddc01f51fb5a5a9aa3994aa15b98ce43bf7d4b
+Block: 4
+Paid: 0.000033296373116512 ETH (48752 gas * 0.682974506 gwei)
+
+✅ Sequence #1 on anvil-hardhat | Total Paid: 0.00194688290912209 ETH (2084090 gas * avg 0.836687731 gwei)
+
+
+==========================
+
+ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+```
+
+
+
 ### 2025.05.16
 
 交易流程:
