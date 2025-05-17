@@ -63,7 +63,118 @@ modifier onlySelf() {
 3. 协议实现细节：[交易流程](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/wayhome.md#20250516)
 4. [gas成本为什么是12500](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/universe-ron.md#2-gas-%E5%B8%B3%E6%9C%AC---%E7%82%BA%E4%BD%95%E8%A6%81%E6%94%B6-12-500)
 
-### 2025.05.17
+### 2025.05.17  
+[跟着大佬学习](https://github.com/IntensiveCoLearning/EIP-7702/blob/main/easyshellworld.md)  
+5. Pectra升级  
+IP‑7702提案随 Ethereum 2025 年 5 月 7 日上线的 Pectra 升级一并激活，Pectra 是迄今为止最全面的一次硬分叉，包含共 11 项 EIP 标准。  
+| EIP 编号   | 名称                          | 功能简介                           |
+| -------- | --------------------------- | ------------------------------ |
+| EIP‑7702 | Smart Accounts for Everyone | 让 EOA 临时具备智能账户能力               |
+| EIP‑7251 | Enterprise‑Grade Staking    | 单验证者质押上限从 32 ETH 提升至 2,048 ETH |
+| EIP‑7002 | Execution‑Layer Exits       | 允许执行层发起验证者主动退出                 |
+| EIP‑6110 | On‑Chain Deposit Handling   | 缩短验证者激活时间从 \~12h 到 \~13min     |
+| EIP‑7691 | Increased Blobspace         | 区块中 Blobspace 翻倍，促进 L2 数据可用性   |
+| EIP‑7523 | State Bloat Mitigation      | 清理空账户、防止无谓合约创建                 |
+| EIP‑2537 | BLS Precompile              | 内建 BLS12‑381 操作，加速聚合签名         |
+| EIP‑2935 | Historical Hashes           | 存储历史区块哈希，支持无状态客户端              |
+| EIP‑7594 | Peer-to-Peer DAS            | P2P 数据可用性抽样，强化 L2 安全           |
+| …        | …                           | 其他如安全与开发者体验优化等                 |
+
+  
+6. 从本地发起7702交易(rust)  
+```rust
+use alloy::{
+    eips::eip7702::Authorization,
+    network::{EthereumWallet, TransactionBuilder, TransactionBuilder7702},
+    node_bindings::Anvil,
+    primitives::U256,
+    providers::{Provider, ProviderBuilder},
+    rpc::types::TransactionRequest,
+    signers::{local::PrivateKeySigner, SignerSync},
+    sol,
+};
+use eyre::Result;
+
+// 使用 Solidity 合约代码生成 Rust 接口
+sol!(
+    #[allow(missing_docs)]
+    #[sol(rpc, bytecode = "608080604052...")]
+    contract Log {
+        #[derive(Debug)]
+        event Hello();
+        event World();
+
+        function emitHello() public {
+            emit Hello();
+        }
+
+        function emitWorld() public {
+            emit World();
+        }
+    }
+);
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    // 启动本地 Anvil 节点，启用 Prague 硬分叉
+    let anvil = Anvil::new().arg("--hardfork").arg("prague").try_spawn()?;
+
+    // 创建两个用户，Alice 和 Bob
+    let alice: PrivateKeySigner = anvil.keys()[0].clone().into();
+    let bob: PrivateKeySigner = anvil.keys()[1].clone().into();
+
+    // 使用 Bob 的钱包创建提供者
+    let rpc_url = anvil.endpoint_url();
+    let wallet = EthereumWallet::from(bob.clone());
+    let provider = ProviderBuilder::new().wallet(wallet).on_http(rpc_url);
+
+    // 部署 Alice 授权的合约
+    let contract = Log::deploy(&provider).await?;
+
+    // 创建授权对象，供 Alice 签名
+    let authorization = Authorization {
+        chain_id: U256::from(anvil.chain_id()),
+        address: *contract.address(),
+        nonce: provider.get_transaction_count(alice.address()).await?,
+    };
+
+    // Alice 对授权对象进行签名
+    let signature = alice.sign_hash_sync(&authorization.signature_hash())?;
+    let signed_authorization = authorization.into_signed(signature);
+
+    // 准备调用合约的 calldata
+    let call = contract.emitHello();
+    let emit_hello_calldata = call.calldata().to_owned();
+
+    // 构建交易请求
+    let tx = TransactionRequest::default()
+        .with_to(alice.address())
+        .with_authorization_list(vec![signed_authorization])
+        .with_input(emit_hello_calldata);
+
+    // 发送交易并等待广播
+    let pending_tx = provider.send_transaction(tx).await?;
+
+    println!("Pending transaction... {}", pending_tx.tx_hash());
+
+    // 等待交易被包含并获取收据
+    let receipt = pending_tx.get_receipt().await?;
+
+    println!(
+        "Transaction included in block {}",
+        receipt.block_number.expect("Failed to get block number")
+    );
+
+    assert!(receipt.status());
+    assert_eq!(receipt.from, bob.address());
+    assert_eq!(receipt.to, Some(alice.address()));
+    assert_eq!(receipt.inner.logs().len(), 1);
+    assert_eq!(receipt.inner.logs()[0].address(), alice.address());
+
+    Ok(())
+}
+
+```
 
 ### 2025.05.18
 
